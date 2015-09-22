@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+// must include this BEFORE including JQM
+$(document).on( "mobileinit", function() {
+  // Change default settings here
+} );
+</script>
+
+<script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+</head>
+<body>
+
+<script>
+
+//////////////////////////////////////////////////////////////////////////////
+//
+// This is a simple test of jQuery Mobile list and event handling.
+// There are lots of good examples out there relative to appending to lists,
+// but virtually none explaining how to remove/delete items. So, I had to
+// generate a test case.
+//
+// Key was figuring out the proper jQuery selector that works with
+// the jQuery Mobile listview wideget; namely the $('ul#myList #item4').remove()
+// syntax where it's essentially the list and the item IDs.
+//
+// Lots of jQuery examples out there for doing this simply won't work with
+// jQuery Mobile.
+//
+
+function testScript(){
+  alert("testscript()");
+}
+
+// an example of hooking the popup
+$( document ).on( "pagecreate", function() {
+    $( "#myPopup2" ).on({
+        popupbeforeposition: function(event) {
+           // alert("popupbeforeposition:2");
+           $('#myList').append('<li><a>hello</a></li>').listview('refresh');
+        },
+        popupafterclose: function() {
+            // alert("popupafterclose:2")
+        }
+    });
+});
+
+
+function removeListItem(lid){
+  // alert("removeListItem:"+lid);
+  $('ul#myList #item4').remove();
+  $('#myList').listview('refresh');
+} // removeListItem()
+
+
+</script>
+
+<div data-role="page" id="pageone">    
+  <div data-role="main" class="ui-content">
+    <h2>My List of Stuffage</h2>
+    <ul id="myList" data-role="listview" data-inset="true">
+
+      <li id="item1" data-icon="plus">
+          <a href="#" onclick="removeListItem('item5')">Click to remove list item</a>
+      </li>
+
+      <li id="item2" data-icon="plus">
+          <a href="#myPopup2" data-rel="popup">Second list item</a>
+          <div data-role="popup" id="myPopup2" class="ui-content">
+            <a href="#" data-rel="back" class="ui-btn ui-corner-all ui-shadow ui-btn ui-icon-delete ui-btn-icon-notext ui-btn-right">Close</a>
+            <p>Popup for the sencond list item (#myPopup2)...</p>
+          </div>
+      </li>
+
+      <li id="item3" data-icon="delete"><a href="#">Third list item</a></li>
+      <li id="item4" data-icon="location"><a href="#">Forth list item</a></li>   
+      <li id="item5" data-icon="plus"><a href="#">Fith list item</a></li>
+    </ul>
+  </div>
+</div> 

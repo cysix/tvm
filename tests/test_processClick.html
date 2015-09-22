@@ -1,0 +1,27 @@
+<!DOCTYPE html> 
+<html>
+<head>
+<title>jQuery Ajax Example with JSON Response</title>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+ 
+<!-- Write Javascript code here -->
+<script>
+
+function processClick(){
+	alert("processClick");
+}
+
+$(document).ready(function(){
+  $('#myElement').click(function(){processClick();}); // works
+});
+
+</script>
+ 
+</head>
+ 
+<body>
+	<a href="#" id="myElement">click here to getjason</a>
+  	<!-- Javascript will print data in here when we have finished the page -->
+ 
+</body>
+</html>
